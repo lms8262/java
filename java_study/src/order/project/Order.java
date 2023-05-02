@@ -57,14 +57,6 @@ public class Order { // 매장 주문 , 부모 클래스
 		this.orderPrice = orderPrice;
 	}
 
-	public String getOrderType() {
-		return orderType;
-	}
-
-	public void setOrderType(String orderType) {
-		this.orderType = orderType;
-	}
-
 	public boolean isOrderComplete() {
 		return orderComplete;
 	}

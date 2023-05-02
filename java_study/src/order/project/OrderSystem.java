@@ -2,10 +2,12 @@ package order.project;
 
 import java.util.ArrayList;
 
+// 주문 관리 시스템
 public class OrderSystem {
 	private static ArrayList<Order> orderList = new ArrayList<>();
 
 	public static void main(String[] args) {
+		// 주문 접수
 		Order order1 = new Order(1, "김철수", 10000);
 		Order order2 = new Order(2, "이순신", 20000);
 
