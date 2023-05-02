@@ -1,11 +1,11 @@
 package order.project;
 
 public class Order { // 매장 주문 , 부모 클래스
-	protected int orderNum; // 주문번호
-	protected String orderName; // 주문고객 이름
-	protected int orderPrice; // 음식 주문 금액
-	protected String orderType; // 주문 유형 매장, 포장, 배달, 대량주문
-	protected boolean orderComplete; // 주문 처리 여부
+	private int orderNum; // 주문 번호
+	private String orderName; // 주문고객 이름
+	private int orderPrice; // 주문 금액
+	protected String orderType; // 주문 유형(매장, 포장, 배달, 대량주문)
+	private boolean orderComplete; // 주문 처리 여부
 
 	public Order(int orderNum, String orderName, int orderPrice) {
 		this.orderNum = orderNum;
@@ -27,7 +27,7 @@ public class Order { // 매장 주문 , 부모 클래스
 	public int payment() {
 		return orderPrice;
 	}
-	
+
 	// 매출 (할인 금액 뺀 금액)
 	public int sales() {
 		return orderPrice;

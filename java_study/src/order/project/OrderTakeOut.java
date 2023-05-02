@@ -1,7 +1,7 @@
 package order.project;
 
-public class OrderTakeOut extends Order {
-	final int discount;
+public class OrderTakeOut extends Order { // 포장 주문시 2000원 할인
+	final int discount; // 포장 주문 할인 값
 
 	public OrderTakeOut(int orderNum, String orderName, int orderPrice) {
 		super(orderNum, orderName, orderPrice);

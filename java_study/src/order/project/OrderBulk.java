@@ -7,15 +7,15 @@ public class OrderBulk extends Order { // 대량구매 10만원이상 구매시 
 		super(orderNum, orderName, orderPrice);
 		super.orderType = "대량주문";
 	}
-
+	
 	@Override
 	public int payment() {
-		return super.payment() - (int) (super.orderPrice * discountRatio);
+		return super.payment() - (int) (super.getOrderPrice() * discountRatio);
 	}
 
 	@Override
 	public int sales() {
-		return super.sales() - (int) (super.orderPrice * discountRatio);
+		return super.sales() - (int) (super.getOrderPrice() * discountRatio);
 	}
 
 }
