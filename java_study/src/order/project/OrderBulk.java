@@ -1,6 +1,6 @@
 package order.project;
 
-public class OrderBulk extends Order {
+public class OrderBulk extends Order { // 대량구매 10만원이상 구매시 5% 할인
 	final double discountRatio = 0.05; // 대량주문 할인율
 
 	public OrderBulk(int orderNum, String orderName, int orderPrice) {

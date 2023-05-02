@@ -1,6 +1,6 @@
 package order.project;
 
-public class Order {
+public class Order { // 매장 주문 , 부모 클래스
 	protected int orderNum; // 주문번호
 	protected String orderName; // 주문고객 이름
 	protected int orderPrice; // 음식 주문 금액
