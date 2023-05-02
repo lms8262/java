@@ -133,8 +133,13 @@ public class OrderSystem {
 
 	// 주문 번호로 주문 정보 출력
 	public static void orderInfoSearch(int orderNum) {
+		Order order = findOrder(orderNum);
+		if (order == null) {
+			System.out.println("입력한 주문 번호를 찾을 수 없습니다.");
+			return;
+		}
 		System.out.println("===============================" + orderNum + "번 주문 내용===============================");
-		System.out.println(findOrder(orderNum).orderInfo());
+		System.out.println(order.orderInfo());
 	}
 
 	// 주문 번호로 주문완료 처리하기
@@ -155,6 +160,10 @@ public class OrderSystem {
 	// 주문 번호로 고객의 실제 지불 금액(할인 및 배달비 적용) 출력
 	public static void paymentCustomer(int orderNum) {
 		Order order = findOrder(orderNum);
+		if (order == null) {
+			System.out.println("입력한 주문 번호를 찾을 수 없습니다.");
+			return;
+		}
 		System.out.println(
 				"주문번호 " + orderNum + "번 " + order.getOrderName() + " 고객님의 지불 금액은 " + order.payment() + "원 입니다.");
 	}
