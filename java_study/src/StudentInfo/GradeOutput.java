@@ -17,7 +17,7 @@ public class GradeOutput {
 	public void subjectScorePrint(Subject subject) {
 		System.out.println("---------------------------------");
 		System.out.println("        " + subject.getSubjectName() + "수강생 학점");
-		System.out.println("이름 | 학번 | 필수과목 | 점수");
+		System.out.println(" 이름  |  학번  |필수과목| 점수");
 		System.out.println("---------------------------------");
 		ArrayList<Student> studentList = subject.getStudentList();
 		for (Student student : studentList) {
