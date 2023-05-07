@@ -8,11 +8,11 @@ public class School {
 	private ArrayList<Subject> subjectList = new ArrayList<>();
 	private ArrayList<Student> studentList = new ArrayList<>();
 
-	// 생성자
+	// 생성자(싱글톤)
 	private School() {
 	}
 
-	// 메소드
+	// 싱글톤 객체 생성 메소드
 	public static School getSchool() {
 		if (goodSchool == null) {
 			goodSchool = new School();
