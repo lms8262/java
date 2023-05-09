@@ -26,6 +26,7 @@ public class GradeOutput {
 					+ getScoreGrade(student, subject.getSubjectId()) + " | ");
 			System.out.println("---------------------------------");
 		}
+		System.out.println();
 	}
 
 	// 학생의 그 과목 점수, 등급 구하기
