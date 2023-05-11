@@ -13,8 +13,37 @@ public class Book {
 		this.name = name;
 		this.checkOutPeriod = Define.GENERAL_PERIOD; // 디폴트 책 대출 기간
 	}
-	
-	public void addCheckOutMember(Member member) {
-		this.checkOutMember = member; 
+
+	public String getName() {
+		return name;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean isCheckOutCheck() {
+		return checkOutCheck;
+	}
+
+	public void setCheckOutCheck(boolean checkOutCheck) {
+		this.checkOutCheck = checkOutCheck;
+	}
+
+	public int getCheckOutPeriod() {
+		return checkOutPeriod;
+	}
+
+	public void setCheckOutPeriod(int checkOutPeriod) {
+		this.checkOutPeriod = checkOutPeriod;
+	}
+
+	public Member getCheckOutMember() {
+		return checkOutMember;
+	}
+	
+	public void setCheckOutMember(Member checkOutMember) {
+		this.checkOutMember = checkOutMember;
+	}
+	
 }
