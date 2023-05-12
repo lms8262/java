@@ -5,7 +5,6 @@ import utils.Define;
 public class Book {
 	// 필드
 	private String name; // 책 이름
-	private boolean checkOutCheck; // 책 대출 여부
 	private int checkOutPeriod; // 책 대출 기간
 	private Member checkOutMember; // 책을 대출 중인 회원
 	
@@ -20,14 +19,6 @@ public class Book {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public boolean isCheckOutCheck() {
-		return checkOutCheck;
-	}
-
-	public void setCheckOutCheck(boolean checkOutCheck) {
-		this.checkOutCheck = checkOutCheck;
 	}
 
 	public int getCheckOutPeriod() {

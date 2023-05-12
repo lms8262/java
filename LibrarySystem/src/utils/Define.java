@@ -10,4 +10,7 @@ public class Define {
 
 	public static final int GENERAL_PERIOD = 7; // 일반회원 책 대출 기간
 	public static final int SPECIAL_PERIOD = 14; // 특별회원 책 대출 기간
+
+	public static final String ADMIN_NAME = "이문수"; // 관리자 이름
+	public static final int ADMIN_PASSWORD = 8262; // 관리자 비밀번호
 }
