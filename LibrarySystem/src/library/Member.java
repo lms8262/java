@@ -23,7 +23,6 @@ public class Member {
 		checkOutBookList.add(book);
 	}
 
-	// getter, setter 메소드
 	public String getName() {
 		return name;
 	}

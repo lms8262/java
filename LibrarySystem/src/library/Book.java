@@ -5,12 +5,12 @@ import utils.Define;
 public class Book {
 	// 필드
 	private String name; // 책 이름
-	private int checkOutPeriod; // 책 대출 기간
-	private Member checkOutMember; // 책을 대출 중인 회원
+	private int checkOutPeriod; // 책 대여 기간
+	private Member checkOutMember; // 책을 대여 중인 회원
 	
 	public Book(String name) {
 		this.name = name;
-		this.checkOutPeriod = Define.GENERAL_PERIOD; // 디폴트 책 대출 기간
+		this.checkOutPeriod = Define.GENERAL_PERIOD; // 디폴트 책 대여 기간
 	}
 
 	public String getName() {

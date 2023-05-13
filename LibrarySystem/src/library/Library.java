@@ -30,7 +30,6 @@ public class Library {
 		bookList.add(book);
 	}
 
-	// getter 메소드
 	public String getLibraryName() {
 		return libraryName;
 	}

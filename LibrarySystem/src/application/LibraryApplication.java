@@ -19,8 +19,9 @@ public class LibraryApplication {
 	GenerateLibraryReport libraryReport = new GenerateLibraryReport();
 	CheckOut[] checkOut = new CheckOut[] { new GeneralCheckOut(), new SpecialCheckOut() };
 
+	// 메인 메소드
 	public static void main(String[] args) {
-		LibraryApplication app = new LibraryApplication(); // 도서관 어플 객체 생성
+		LibraryApplication app = new LibraryApplication(); // 도서관 어플리케이션 객체 생성
 		app.applicationRun(); // 도서관 어플리케이션 실행
 	}
 
@@ -31,12 +32,13 @@ public class LibraryApplication {
 		boolean runCheck = true;
 		Member loginMember = null;
 		while (runCheck) {
+			System.out.println("----------------------------------------------------------");
+			System.out.println("\t\t  " + library.getLibraryName() + " 어플리케이션");
+			System.out.println(" 1.로그인   2.도서 대여   3.도서 반납   4.관리자 모드   5.회원가입");
+			System.out.println(" 6.대여 가능 도서 목록   7.로그아웃   8.어플리케이션 종료");
+			System.out.println("----------------------------------------------------------");
 			while (true) {
 				try {
-					System.out.println("------------------------------------------------------");
-					System.out.println("\t\t  " + library.getLibraryName() + " 어플리케이션");
-					System.out.println(" 1.로그인 | 2.도서 대여 | 3.도서 반납 | 4.관리자 모드 | 5.종료");
-					System.out.println("------------------------------------------------------");
 					int select = 0;
 					System.out.print("선택> ");
 					select = scanner.nextInt();
@@ -51,21 +53,28 @@ public class LibraryApplication {
 						returnBook(loginMember);
 						break;
 					case 4:
-						System.out.println("-------------------------");
-						System.out.println("\t4.관리자 모드");
-						System.out.println("-------------------------");
+						adminMode();
 						break;
 					case 5:
+						register(loginMember);
+						break;
+					case 6:
+						libraryReport.checkOutAbleBookListReport();
+						break;
+					case 7:
+						loginMember = logout(loginMember);
+						break;
+					case 8:
 						runCheck = false;
 						break;
 					default:
-						System.out.println("1~5 사이의 숫자를 입력해주세요.");
+						System.out.println("1~8 사이의 숫자를 입력해주세요.");
 						break;
 					}
 					break;
 				} catch (InputMismatchException e) {
 					scanner.next();
-					System.out.println("1~5 사이의 숫자를 입력해주세요.");
+					System.out.println("1~8 사이의 숫자를 입력해주세요.");
 				}
 			}
 
@@ -83,7 +92,7 @@ public class LibraryApplication {
 		}
 	}
 
-	// 회원 생성 및 도서관에 추가
+	// 회원 생성 및 도서관 회원목록에 추가
 	public void createMember() {
 		Member member1 = new Member("김철수", 22021801);
 		Member member2 = new Member("이지혜", 17032302);
@@ -115,13 +124,12 @@ public class LibraryApplication {
 		return member;
 	}
 
-	// 1.로그인
+	// 로그인
 	public Member login(Member loginMember) {
-		System.out.println("-------------------------");
-		System.out.println("\t1.로그인");
-		System.out.println("-------------------------");
-		Member member = loginMember;
 		if (loginMember == null) {
+			System.out.println("-------------------------");
+			System.out.println("\t1.로그인");
+			System.out.println("-------------------------");
 			System.out.print("회원이름> ");
 			String name = scanner.next();
 			int memberId = 0;
@@ -135,19 +143,19 @@ public class LibraryApplication {
 					System.out.println("회원번호는 8자리 숫자로 입력해주세요.");
 				}
 			}
-			member = searchMember(name, memberId);
-			if (member == null) { // 입력한 값과 맞는 회원 정보가 없을 경우
+			loginMember = searchMember(name, memberId);
+			if (loginMember == null) { // 입력한 값과 맞는 회원 정보가 없을 경우
 				System.out.println("회원정보를 찾을 수 없습니다.");
-				return member;
+				return loginMember;
 			}
-			System.out.println(member.getName() + "님 로그인에 성공했습니다.");
+			System.out.println(loginMember.getName() + "님 로그인에 성공했습니다.");
 		} else {
-			System.out.println(member.getName() + "님 이미 로그인 중입니다.");
+			System.out.println(loginMember.getName() + "님 이미 로그인 중입니다.");
 		}
-		return member;
+		return loginMember;
 	}
 
-	// 2.도서 대여
+	// 도서 대여
 	public void checkOutBook(Member loginMember) {
 		System.out.println("-------------------------");
 		System.out.println("\t2.도서 대여");
@@ -164,12 +172,16 @@ public class LibraryApplication {
 		}
 	}
 
-	// 3.도서 반납
+	// 도서 반납
 	public void returnBook(Member loginMember) {
-		System.out.println("-------------------------");
-		System.out.println("\t3.도서 반납");
-		System.out.println("-------------------------");
 		if (loginMember != null) {
+			if (loginMember.getCheckOutBookList().size() == 0) {
+				System.out.println("현재 대여중인 책이 없습니다.");
+				return;
+			}
+			System.out.println("-------------------------");
+			System.out.println("\t3.도서 반납");
+			System.out.println("-------------------------");
 			if (loginMember.getMemberType() == Define.SPECIAL_TYPE) {
 				checkOut[Define.SPECIAL_TYPE].returnBook(loginMember);
 			} else {
@@ -178,6 +190,109 @@ public class LibraryApplication {
 		} else {
 			System.out.println("로그인이 필요합니다.");
 			return;
+		}
+	}
+
+	// 회원가입
+	public void register(Member loginMember) {
+		if (loginMember == null) {
+			System.out.println("이름을 입력해주세요.");
+			System.out.print("이름> ");
+			String name = scanner.next();
+			int memberId = 0;
+			System.out.println("회원번호를 8자리 숫자로 입력해주세요.");
+			while (true) {
+				try {
+					System.out.print("회원번호> ");
+					memberId = scanner.nextInt();
+					if (10000000 <= memberId && memberId <= 99999999) {
+						break;
+					} else {
+						System.out.println("회원번호는 8자리 숫자로 입력해주세요.");
+					}
+				} catch (InputMismatchException e) {
+					scanner.next();
+					System.out.println("회원번호는 8자리 숫자로 입력해주세요.");
+				}
+			}
+			Member member = new Member(name, memberId);
+			library.addMember(member);
+			System.out.println(member.getName() + "님 회원가입이 완료되었습니다.");
+		} else {
+			System.out.println(loginMember.getName() + "님 이미 로그인 중입니다.");
+		}
+	}
+
+	// 로그아웃
+	public Member logout(Member loginMember) {
+		if (loginMember != null) {
+			System.out.println(loginMember.getName() + "님 로그아웃 완료했습니다.");
+			loginMember = null;
+		} else {
+			System.out.println("로그인 상태가 아닙니다.");
+		}
+		return loginMember;
+	}
+
+	// 관리자 모드
+	public void adminMode() {
+		System.out.println("-------------------------");
+		System.out.println("\t4.관리자 모드");
+		System.out.println("-------------------------");
+		System.out.println("관리자 이름과 비밀번호를 입력해주세요.");
+		System.out.print("관리자 이름> ");
+		String adminName = scanner.next();
+		int adminPassword = 0;
+		while (true) {
+			try {
+				System.out.print("관리자 비밀번호> ");
+				adminPassword = scanner.nextInt();
+				break;
+			} catch (InputMismatchException e) {
+				scanner.next();
+				System.out.println("비밀번호는 숫자를 입력해주세요.");
+			}
+		}
+		if (adminName.equals(Define.ADMIN_NAME) && adminPassword == Define.ADMIN_PASSWORD) {
+			boolean runCheck = true;
+			while (runCheck) {
+				System.out.println("----------------------------------------------------------");
+				System.out.println("\t\t관리자 모드");
+				System.out.println("1.회원목록   2.도서관 보유 도서 현황   3.대여 중인 도서 목록");
+				System.out.println("4.관리자 모드 종료");
+				System.out.println("----------------------------------------------------------");
+				while (true) {
+					try {
+						int select = 0;
+						System.out.print("선택> ");
+						select = scanner.nextInt();
+						switch (select) {
+						case 1:
+							libraryReport.memberListReport();
+							break;
+						case 2:
+							libraryReport.bookListReport();
+							break;
+						case 3:
+							libraryReport.checkOutBookListReport();
+							break;
+						case 4:
+							runCheck = false;
+							System.out.println("관리자 모드 종료");
+							break;
+						default:
+							System.out.println("1~4 사이의 숫자를 입력해주세요.");
+							break;
+						}
+						break;
+					} catch (InputMismatchException e) {
+						scanner.next();
+						System.out.println("1~4 사이의 숫자를 입력해주세요.");
+					}
+				}
+			}
+		} else {
+			System.out.println("관리자 정보를 찾을 수 없습니다.");
 		}
 	}
 
