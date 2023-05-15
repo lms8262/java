@@ -206,6 +206,12 @@ public class LibraryApplication {
 					System.out.print("회원번호> ");
 					memberId = scanner.nextInt();
 					if (10000000 <= memberId && memberId <= 99999999) {
+						for (Member member : library.getMemberList()) {
+							if (member.getMemberId() == memberId) { // 회원번호 중복 생성 막기
+								System.out.println("이미 존재하는 회원번호입니다.");
+								return;
+							}
+						}
 						break;
 					} else {
 						System.out.println("회원번호는 8자리 숫자로 입력해주세요.");
