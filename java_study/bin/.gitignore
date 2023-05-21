@@ -1,4 +1,3 @@
-/ch19/
 /StudentInfo/
 /ch02/
 /ch03/
@@ -15,9 +14,12 @@
 /ch15/
 /ch16/
 /ch18/
+/ch19/
 /customer/
 /ebook/
 /java_modeling/
 /order/
 /question/
 /singleton/
+/module-info.class
+/.gitignore
