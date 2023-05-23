@@ -1,5 +1,5 @@
 package product;
 
-public class Fish {
+public class Fish extends Product {
 
 }

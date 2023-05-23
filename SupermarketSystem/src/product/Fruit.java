@@ -1,5 +1,5 @@
 package product;
 
-public class Fruit {
-	
+public class Fruit extends Product {
+
 }
