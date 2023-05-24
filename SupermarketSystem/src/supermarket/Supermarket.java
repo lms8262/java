@@ -3,7 +3,6 @@ package supermarket;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import product.Product;
 import receipt.Receipt;
 
 public class Supermarket {

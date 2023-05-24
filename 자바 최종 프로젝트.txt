@@ -20,8 +20,7 @@ private static final long serialVersionUID 선언하기//
 마트	싱글톤 객체, 회원목록(HashSet), 상품목록(HashSet)
 회원	회원이름, 회원번호(4자리), 회원등급(SILVER, GOLD, VIP), 포인트 적립 비율, 이용실적, 보유포인트, 영수증 목록(ArrayList)
 	HashSet에 중복저장을 막기 위해 hashcode() , equals() 오버라이딩 해줘야함
-상품	추상클래스 상속 이용
-	상품 클래스(부모)	종류별 클래스(자식)
-	상품 이름, 가격	이름 가격이 같으면 같은 객체로 인식하도록 hashcode() , equals() 오버라이딩 해줘야함
+상품	상품 이름, 종류, 가격	이름 종류 가격이 같으면 같은 객체로 인식하도록 hashcode() , equals() 오버라이딩 해줘야함
 영수증	결제 회원, 결제 금액, 결제일, 결제 상품 목록 및 개수
 상수	회원등급, 등급별 포인트 적립(SILVER=1%, GOLD=3%, VIP=5%), 회원등급 조정기준 이용실적(GOLD=30만원, VIP=100만원)
+	상품 종류

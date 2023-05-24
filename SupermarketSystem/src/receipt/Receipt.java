@@ -2,8 +2,8 @@ package receipt;
 
 import java.util.HashMap;
 
-import product.Product;
 import supermarket.Member;
+import supermarket.Product;
 
 public class Receipt {
 	private Member member; // 결제 회원
