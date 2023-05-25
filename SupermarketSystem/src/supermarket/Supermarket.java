@@ -3,6 +3,8 @@ package supermarket;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import member.Member;
+import product.Product;
 import receipt.Receipt;
 
 public class Supermarket {
@@ -12,30 +14,25 @@ public class Supermarket {
 	private HashSet<Product> productList = new HashSet<>(); // 마트 상품 목록
 	private ArrayList<Receipt> receiptList = new ArrayList<>(); // 영수증 목록
 
-	// 싱글톤 생성자
-	private Supermarket() {
+	private Supermarket() { // 싱글톤 생성자
 	}
 
-	// 싱글톤 메소드
-	public static Supermarket getInstance() {
+	public static Supermarket getInstance() { // 싱글톤 메소드
 		if (instance == null) {
 			instance = new Supermarket();
 		}
 		return instance;
 	}
 
-	// 회원 추가
-	public void addMember(Member member) {
+	public void addMember(Member member) { // 회원 추가
 		memberList.add(member);
 	}
 
-	// 상품 추가
-	public void addProduct(Product product) {
+	public void addProduct(Product product) { // 상품 추가
 		productList.add(product);
 	}
 
-	// 영수증 추가
-	public void addReceipt(Receipt receipt) {
+	public void addReceipt(Receipt receipt) { // 영수증 추가
 		receiptList.add(receipt);
 	}
 
@@ -49,6 +46,10 @@ public class Supermarket {
 
 	public HashSet<Product> getProductList() {
 		return productList;
+	}
+
+	public ArrayList<Receipt> getReceiptList() {
+		return receiptList;
 	}
 
 }
