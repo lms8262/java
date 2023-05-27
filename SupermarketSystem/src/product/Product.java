@@ -9,28 +9,6 @@ public abstract class Product {
 		this.price = price;
 	}
 
-	@Override
-	public String toString() {
-		return "이름: " + name + ", 가격: " + price;
-	}
-
-	@Override
-	public int hashCode() {
-		return name.hashCode() + price;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof Product)) {
-			return false;
-		}
-		Product target = (Product) obj;
-		return target.name.equals(name) && (target.price == price);
-	}
-
 	public String getName() {
 		return name;
 	}

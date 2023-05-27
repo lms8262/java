@@ -17,10 +17,10 @@ public class Member {
 	public Member(String memberName, int memberNum) {
 		this.memberName = memberName;
 		this.memberNum = memberNum;
-		this.membership = Define.MS_SILVER;
-		this.pointRatio = Define.POINT_RATIO_SILVER;
+		this.membership = Define.MS_SILVER; // 기본 회원등급 설정
+		this.pointRatio = Define.POINT_RATIO_SILVER; // 기본 포인트 적립 비율 설정
 	}
-
+	
 	@Override
 	public String toString() {
 		return "이름: " + memberName + ", 회원번호: " + memberNum;
@@ -98,8 +98,16 @@ public class Member {
 		return membership;
 	}
 
+	public void setMembership(String membership) {
+		this.membership = membership;
+	}
+
 	public double getPointRatio() {
 		return pointRatio;
+	}
+
+	public void setPointRatio(double pointRatio) {
+		this.pointRatio = pointRatio;
 	}
 
 	public int getPoint() {
