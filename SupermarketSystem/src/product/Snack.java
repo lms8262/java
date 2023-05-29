@@ -9,6 +9,11 @@ public class Snack extends Product {
 	}
 
 	@Override
+	public String productInfo() {
+		return company + " " + super.getName() + "(" + super.getPrice() + "원)";
+	}
+
+	@Override
 	public String toString() {
 		return "이름: " + super.getName() + ", 가격: " + super.getPrice() + ", 제조회사: " + company;
 	}
@@ -28,7 +33,7 @@ public class Snack extends Product {
 		}
 		Snack target = (Snack) obj;
 		return (target.getName().equals(super.getName())) && (target.getPrice() == super.getPrice())
-				&& (target.company.equals(company));
+				&& (target.company.equals(this.company));
 	}
 
 	public String getCompany() {

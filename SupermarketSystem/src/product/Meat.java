@@ -9,6 +9,11 @@ public class Meat extends Product {
 	}
 
 	@Override
+	public String productInfo() {
+		return origin + " " + super.getName() + "(" + super.getPrice() + "원)";
+	}
+
+	@Override
 	public String toString() {
 		return "이름: " + super.getName() + ", 가격: " + super.getPrice() + ", 원산지: " + origin;
 	}
@@ -28,7 +33,7 @@ public class Meat extends Product {
 		}
 		Meat target = (Meat) obj;
 		return (target.getName().equals(super.getName())) && (target.getPrice() == super.getPrice())
-				&& (target.origin.equals(origin));
+				&& (target.origin.equals(this.origin));
 	}
 
 	public String getOrigin() {

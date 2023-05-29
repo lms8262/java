@@ -9,6 +9,8 @@ public abstract class Product {
 		this.price = price;
 	}
 
+	public abstract String productInfo(); // 상품 정보 출력
+
 	public String getName() {
 		return name;
 	}

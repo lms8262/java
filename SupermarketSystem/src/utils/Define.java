@@ -1,6 +1,9 @@
 package utils;
 
 public class Define {
+	// 구분선
+	public static final String LINE = "----------------------------------------";
+
 	// 회원등급
 	public static final String MS_SILVER = "SILVER";
 	public static final String MS_GOLD = "GOLD";
@@ -22,4 +25,8 @@ public class Define {
 	public static final String MEAT = "육류";
 	public static final String SNACK = "과자";
 	public static final String VEGETABLE = "야채";
+
+	// 관리자 이름, 비밀번호
+	public static final String ADMIN_NAME = "이문수";
+	public static final int ADMIN_PASSWORD = 8262;
 }

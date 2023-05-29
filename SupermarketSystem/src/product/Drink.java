@@ -9,6 +9,11 @@ public class Drink extends Product {
 	}
 
 	@Override
+	public String productInfo() {
+		return super.getName() + " " + capacity + "ml(" + super.getPrice() + "원)";
+	}
+
+	@Override
 	public String toString() {
 		return "이름: " + super.getName() + ", 가격: " + super.getPrice() + ", 용량: " + capacity;
 	}
@@ -28,7 +33,7 @@ public class Drink extends Product {
 		}
 		Drink target = (Drink) obj;
 		return (target.getName().equals(super.getName())) && (target.getPrice() == super.getPrice())
-				&& (target.capacity == capacity);
+				&& (target.capacity == this.capacity);
 	}
 
 	public int getCapacity() {
