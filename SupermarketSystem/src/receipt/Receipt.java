@@ -1,12 +1,14 @@
 package receipt;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Serializable;
+import java.util.*;
 
 import member.Member;
 import product.Product;
 
-public class Receipt {
+public class Receipt implements Serializable {
+
+	private static final long serialVersionUID = -6583283759512670687L;
 	private Member member; // 결제 회원
 	private int payment; // 결제 금액
 	private String paymentDate; // 결제일

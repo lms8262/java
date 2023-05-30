@@ -1,6 +1,8 @@
 package product;
 
 public class Fish extends Product {
+
+	private static final long serialVersionUID = 8257485387493468148L;
 	private String origin; // 원산지
 
 	public Fish(String name, int price, String origin) {

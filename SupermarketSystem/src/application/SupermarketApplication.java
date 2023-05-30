@@ -3,6 +3,7 @@ package application;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import inputoutput.InputOutput;
 import member.Member;
 import product.*;
 import receipt.Receipt;
@@ -13,10 +14,15 @@ public class SupermarketApplication {
 	Supermarket supermarket = Supermarket.getInstance();
 	Map<Product, Integer> shoppingCart = new HashMap<>(); // 장바구니
 	Scanner sc = new Scanner(System.in);
+	InputOutput io = new InputOutput();
 
 	public void run() {
 		createProduct();
-		createMember();
+		io.loadMemberList();
+		io.loadReceiptList();
+		if (supermarket.getMemberList().size() == 0) {
+			createMember();
+		}
 		boolean runCheck = true;
 		while (runCheck) {
 			System.out.println(Define.LINE);
@@ -59,6 +65,8 @@ public class SupermarketApplication {
 				}
 			}
 		}
+		io.saveMemberList();
+		io.saveReceiptList();
 		System.out.println("프로그램 종료");
 		sc.close();
 	}

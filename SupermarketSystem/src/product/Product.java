@@ -1,6 +1,10 @@
 package product;
 
-public abstract class Product {
+import java.io.Serializable;
+
+public abstract class Product implements Serializable {
+
+	private static final long serialVersionUID = -7773581280237097402L;
 	private String name; // 상품 이름
 	private int price; // 상품 가격
 

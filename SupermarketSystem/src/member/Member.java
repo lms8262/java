@@ -1,12 +1,14 @@
 package member;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
+import java.util.*;
 
 import receipt.Receipt;
 import utils.Define;
 
-public class Member {
+public class Member implements Serializable {
+
+	private static final long serialVersionUID = -5019793106604660241L;
 	private String memberName; // 회원이름
 	private int memberNum; // 회원번호
 	private String membership; // 회원등급

@@ -1,6 +1,8 @@
 package product;
 
 public class Fruit extends Product {
+
+	private static final long serialVersionUID = 6143226448505818320L;
 	private String origin; // 원산지
 
 	public Fruit(String name, int price, String origin) {

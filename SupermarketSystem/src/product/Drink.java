@@ -1,6 +1,8 @@
 package product;
 
 public class Drink extends Product {
+
+	private static final long serialVersionUID = 2390594444019039707L;
 	private int capacity; // 음료 용량
 
 	public Drink(String name, int price, int capacity) {

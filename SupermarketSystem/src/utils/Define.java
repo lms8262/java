@@ -1,6 +1,10 @@
 package utils;
 
 public class Define {
+	// 직렬화 파일명
+	public static final String MEMBER_FILE = "Member.ser";
+	public static final String RECEIPT_FILE = "Receipt.ser";
+
 	// 구분선
 	public static final String LINE = "----------------------------------------";
 

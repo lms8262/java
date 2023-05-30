@@ -1,6 +1,8 @@
 package product;
 
 public class Snack extends Product {
+
+	private static final long serialVersionUID = 4770757344462807421L;
 	private String company; // 제조회사
 
 	public Snack(String name, int price, String company) {

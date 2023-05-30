@@ -1,7 +1,6 @@
 package supermarket;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.*;
 
 import member.Member;
 import product.Product;
@@ -44,12 +43,20 @@ public class Supermarket {
 		return memberList;
 	}
 
+	public void setMemberList(HashSet<Member> memberList) {
+		this.memberList = memberList;
+	}
+
 	public HashSet<Product> getProductList() {
 		return productList;
 	}
 
 	public ArrayList<Receipt> getReceiptList() {
 		return receiptList;
+	}
+
+	public void setReceiptList(ArrayList<Receipt> receiptList) {
+		this.receiptList = receiptList;
 	}
 
 }
