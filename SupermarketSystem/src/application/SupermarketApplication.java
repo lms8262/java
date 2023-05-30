@@ -14,7 +14,7 @@ public class SupermarketApplication {
 	Supermarket supermarket = Supermarket.getInstance();
 	Map<Product, Integer> shoppingCart = new HashMap<>(); // 장바구니
 	Scanner sc = new Scanner(System.in);
-	InputOutput io = new InputOutput();
+	InputOutput io = new InputOutput(); // 직렬화, 역직렬화 관련 객체
 
 	public void run() {
 		createProduct();
@@ -184,7 +184,7 @@ public class SupermarketApplication {
 		return null; // 검색한 회원이 없으면 null 리턴
 	}
 
-	// 결제, 회원정보 확인 시 로그인
+	// 결제, 회원정보 확인 시 로그인 + 회원정보 찾지 못한경우 회원가입
 	public Member login() {
 		System.out.println("회원이름과 회원번호를 입력해주세요.");
 		System.out.print("회원이름> ");
@@ -210,6 +210,7 @@ public class SupermarketApplication {
 				if (select.toUpperCase().equals("Y")) { // Y 선택시 입력한 정보로 회원가입
 					member = new Member(memberName, memberNum);
 					supermarket.addMember(member);
+					io.saveMemberList();
 					System.out.println(member.getMemberName() + "(" + member.getMemberNum() + ")님 회원가입을 환영합니다.");
 					return member;
 				} else if (select.toUpperCase().equals("N")) { // N 선택시 게스트로 진행
@@ -571,7 +572,6 @@ public class SupermarketApplication {
 							System.out.println("포인트는 10포인트 단위 정수로 입력해주세요.");
 						} else {
 							member.usePoint(point);
-							System.out.println(point + "point를 사용하셨습니다.");
 							break;
 						}
 					} catch (Exception e) {
@@ -594,6 +594,8 @@ public class SupermarketApplication {
 			member.upgradeMembership(); // 회원등급 업그레이드
 		}
 		createReceipt(member, totalPrice, shoppingCart);
+		io.saveMemberList();
+		io.saveReceiptList();
 		shoppingCart = new HashMap<>(); // 결제 후 장바구니 초기화
 	}
 
