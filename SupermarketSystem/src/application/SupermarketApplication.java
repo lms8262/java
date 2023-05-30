@@ -592,7 +592,7 @@ public class SupermarketApplication {
 	// 영수증 생성 메소드
 	public void createReceipt(Member member, int payment, Map<Product, Integer> shoppingCart) {
 		Date nowDate = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시:mm분:ss초");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String strNowDate = sdf.format(nowDate);
 		Receipt receipt = new Receipt(member, payment, strNowDate, shoppingCart);
 		supermarket.addReceipt(receipt);
