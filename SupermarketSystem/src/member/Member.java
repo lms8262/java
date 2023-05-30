@@ -46,15 +46,20 @@ public class Member {
 
 	public void savePoint(int payment) { // 포인트 적립
 		point += payment * pointRatio;
+		System.out.println(Math.round(payment * pointRatio) + "point가 적립되었습니다. 현재 보유 포인트는 " + point + "point 입니다.");
 	}
 
 	public void usePoint(int point) { // 포인트 사용
-		if (this.point < point) {
-			System.out.println("포인트가 부족합니다. 현재 보유 포인트는 " + this.point + "point 입니다.");
-			return;
+		while (true) {
+			if (this.point < point) {
+				System.out.println("포인트가 부족합니다. 현재 보유 포인트는 " + this.point + "point 입니다.");
+				return;
+			} else {
+				this.point -= point;
+				System.out.println(point + "point를 사용하셨습니다. 남은 포인트는 " + this.point + "point 입니다.");
+				break;
+			}
 		}
-		this.point -= point;
-		System.out.println(point + "point를 사용하셨습니다. 남은 포인트는 " + this.point + "point 입니다.");
 	}
 
 	public void upgradeMembership() { // 회원등급 업그레이드
@@ -125,6 +130,10 @@ public class Member {
 
 	public int getPoint() {
 		return point;
+	}
+
+	public void setPoint(int point) {
+		this.point = point;
 	}
 
 	public List<Receipt> getReceiptList() {

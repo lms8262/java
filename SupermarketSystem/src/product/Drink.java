@@ -10,7 +10,7 @@ public class Drink extends Product {
 
 	@Override
 	public String productInfo() {
-		return super.getName() + " " + capacity + "ml(" + super.getPrice() + "원)";
+		return super.getName() + "|" + capacity + "ml|" + super.getPrice() + "원";
 	}
 
 	@Override

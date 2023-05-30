@@ -1,12 +1,11 @@
 package application;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import member.Member;
 import product.*;
+import receipt.Receipt;
 import supermarket.Supermarket;
 import utils.Define;
 
@@ -38,7 +37,7 @@ public class SupermarketApplication {
 						printShoppingCartList(); // 장바구니 확인
 						break;
 					case 3:
-						// 결제 메소드
+						payment(); // 결제하기
 						break;
 					case 4:
 						memberInfo(); // 회원정보 확인
@@ -64,7 +63,8 @@ public class SupermarketApplication {
 		sc.close();
 	}
 
-	public void createMember() { // 기본 회원 생성 및 등록
+	// 기본 회원 생성 및 등록
+	public void createMember() {
 		Member member1 = new Member("김철수", 1234);
 		Member member2 = new Member("이소라", 2345);
 		Member member3 = new Member("강백호", 3456);
@@ -79,11 +79,16 @@ public class SupermarketApplication {
 
 		member4.setMembership(Define.MS_GOLD);
 		member4.setPointRatio(Define.POINT_RATIO_GOLD);
+		member4.setTotalPayment(300000);
+		member4.setPoint(3000);
 		member5.setMembership(Define.MS_VIP);
 		member5.setPointRatio(Define.POINT_RATIO_VIP);
+		member5.setTotalPayment(1000000);
+		member5.setPoint(10000);
 	}
 
-	public void createProduct() { // 상품 생성 및 등록
+	// 상품 생성 및 등록
+	public void createProduct() {
 		Drink drink1 = new Drink("옥수수 수염차", 1500, 500);
 		Drink drink2 = new Drink("포카리스웨트", 1200, 340);
 		Drink drink3 = new Drink("웰치스", 800, 355);
@@ -157,7 +162,8 @@ public class SupermarketApplication {
 		supermarket.addProduct(vegetable5);
 	}
 
-	public Member searchMember(String memberName, int MemberNum) { // 회원 검색
+	// 회원 검색
+	public Member searchMember(String memberName, int MemberNum) {
 		Iterator<Member> members = supermarket.getMemberList().iterator();
 		Member member = null;
 		Member checkMember = new Member(memberName, MemberNum);
@@ -170,7 +176,8 @@ public class SupermarketApplication {
 		return null; // 검색한 회원이 없으면 null 리턴
 	}
 
-	public Member login() { // 결제, 회원정보 확인 시 로그인
+	// 결제, 회원정보 확인 시 로그인
+	public Member login() {
 		System.out.println("회원이름과 회원번호를 입력해주세요.");
 		System.out.print("회원이름> ");
 		String memberName = sc.next();
@@ -190,7 +197,7 @@ public class SupermarketApplication {
 			System.out.println("회원정보를 찾을 수 없습니다.");
 			System.out.println("입력한 정보로 회원가입 하시겠습니까? Y / N");
 			while (true) {
-				System.out.println("선택> ");
+				System.out.print("선택> ");
 				String select = sc.next();
 				if (select.toUpperCase().equals("Y")) { // Y 선택시 입력한 정보로 회원가입
 					member = new Member(memberName, memberNum);
@@ -198,7 +205,7 @@ public class SupermarketApplication {
 					System.out.println(member.getMemberName() + "(" + member.getMemberNum() + ")님 회원가입을 환영합니다.");
 					return member;
 				} else if (select.toUpperCase().equals("N")) { // N 선택시 게스트로 진행
-					System.out.println("회원가입을 하지 않으셨습니다. 게스트로 진행합니다.");
+					System.out.println("회원가입을 하지 않으셨습니다. 비회원으로 진행합니다.");
 					return null;
 				} else {
 					System.out.println("Y 또는 N 으로 입력해주세요.");
@@ -210,16 +217,18 @@ public class SupermarketApplication {
 		}
 	}
 
-	public void memberInfo() { // 회원정보 확인
+	// 회원정보 확인
+	public void memberInfo() {
 		Member member = login();
 		if (member == null) {
-			System.out.println("게스트로는 회원정보를 확인할 수 없습니다.");
+			System.out.println("비회원으로는 회원정보를 확인할 수 없습니다.");
 			return;
 		}
 		member.printMemberInfo();
 	}
 
-	public void printMemberList() { // 전체 회원이름(회원번호) 출력
+	// 전체 회원이름(회원번호) 출력
+	public void printMemberList() {
 		System.out.println("관리자 이름과 비밀번호를 입력해주세요.");
 		System.out.print("이름> ");
 		String adminName = sc.next();
@@ -249,15 +258,16 @@ public class SupermarketApplication {
 		System.out.println(Define.LINE);
 	}
 
-	public void printShoppingCartList() { // 장바구니 확인
+	// 장바구니 확인
+	public void printShoppingCartList() {
 		if (shoppingCart.size() == 0) {
-			System.out.println("장바구니가 비어있습니다.");
+			System.out.println("장바구니에 담은 상품이 없습니다.");
 			return;
 		}
 		Iterator<Map.Entry<Product, Integer>> products = shoppingCart.entrySet().iterator();
 		System.out.println(Define.LINE);
 		System.out.println("\t\t장바구니");
-		System.out.println("상품명  |  가격  |  수량");
+		System.out.println("상품정보\t\t\t수량");
 		while (products.hasNext()) {
 			Map.Entry<Product, Integer> productEntry = products.next();
 			Product product = productEntry.getKey();
@@ -267,7 +277,8 @@ public class SupermarketApplication {
 		System.out.println(Define.LINE);
 	}
 
-	public void shopping() { // 쇼핑하기
+	// 쇼핑하기
+	public void shopping() {
 		System.out.println(Define.LINE);
 		System.out.println("어떤 종류의 상품을 원하십니까?");
 		System.out.println("1." + Define.DRINK + "   2." + Define.FISH + "   3." + Define.FRUIT);
@@ -315,7 +326,8 @@ public class SupermarketApplication {
 		}
 	}
 
-	public void printProductList(String kind) { // 종류별 상품 목록 출력
+	// 종류별 상품 목록 출력
+	public void printProductList(String kind) {
 		System.out.println(Define.LINE);
 		System.out.println("\t" + kind + " 코너");
 		Iterator<Product> products = supermarket.getProductList().iterator();
@@ -372,7 +384,8 @@ public class SupermarketApplication {
 		System.out.println(Define.LINE);
 	}
 
-	public void putProduct(String kind) { // 장바구니에 상품 담기
+	// 장바구니에 상품 담기
+	public void putProduct(String kind) {
 		System.out.println("담을 상품의 정보를 입력해주세요.");
 		System.out.print("상품이름(띄어쓰기 포함)> ");
 		sc.nextLine();
@@ -435,7 +448,8 @@ public class SupermarketApplication {
 				if (product instanceof Drink) {
 					if ((product.hashCode() == drink.hashCode()) && (product.equals(drink))) {
 						shoppingCart.put(product, amount);
-						break;
+						System.out.println("상품을 장바구니에 담았습니다.");
+						return;
 					}
 				}
 			}
@@ -447,7 +461,8 @@ public class SupermarketApplication {
 				if (product instanceof Fish) {
 					if ((product.hashCode() == fish.hashCode()) && (product.equals(fish))) {
 						shoppingCart.put(product, amount);
-						break;
+						System.out.println("상품을 장바구니에 담았습니다.");
+						return;
 					}
 				}
 			}
@@ -459,7 +474,8 @@ public class SupermarketApplication {
 				if (product instanceof Fruit) {
 					if ((product.hashCode() == fruit.hashCode()) && (product.equals(fruit))) {
 						shoppingCart.put(product, amount);
-						break;
+						System.out.println("상품을 장바구니에 담았습니다.");
+						return;
 					}
 				}
 			}
@@ -471,7 +487,8 @@ public class SupermarketApplication {
 				if (product instanceof Meat) {
 					if ((product.hashCode() == meat.hashCode()) && (product.equals(meat))) {
 						shoppingCart.put(product, amount);
-						break;
+						System.out.println("상품을 장바구니에 담았습니다.");
+						return;
 					}
 				}
 			}
@@ -483,7 +500,8 @@ public class SupermarketApplication {
 				if (product instanceof Snack) {
 					if ((product.hashCode() == snack.hashCode()) && (product.equals(snack))) {
 						shoppingCart.put(product, amount);
-						break;
+						System.out.println("상품을 장바구니에 담았습니다.");
+						return;
 					}
 				}
 			}
@@ -495,16 +513,91 @@ public class SupermarketApplication {
 				if (product instanceof Vegetable) {
 					if ((product.hashCode() == vegetable.hashCode()) && (product.equals(vegetable))) {
 						shoppingCart.put(product, amount);
-						break;
+						System.out.println("상품을 장바구니에 담았습니다.");
+						return;
 					}
 				}
 			}
 			break;
 		}
-		System.out.println("상품을 장바구니에 담았습니다.");
+		System.out.println("없는 상품입니다.");
 	}
 
-	public void payment() { // 상품 결제하기
+	// 상품 결제하기
+	public void payment() {
+		printShoppingCartList();
+		if (shoppingCart.size() == 0) {
+			System.out.println("상품을 장바구니에 담은 후에 결제를 진행해주세요.");
+			return;
+		}
+		Iterator<Map.Entry<Product, Integer>> products = shoppingCart.entrySet().iterator();
+		int count = 0;
+		int totalPrice = 0;
+		Member member = null;
+		while (products.hasNext()) {
+			Map.Entry<Product, Integer> productEntry = products.next();
+			Product product = productEntry.getKey();
+			int amount = productEntry.getValue();
+			totalPrice += product.getPrice() * amount;
+			count++;
+		}
+		System.out.println("상품 " + count + "종의 총 가격은 " + totalPrice + "입니다.");
+		member = login();
+		if (member == null) {
+			System.out.println("비회원은 포인트가 적립되지 않습니다.");
+		}
+		if (member != null) {
+			System.out.println("포인트를 사용하시겠습니까? Y / N");
+			while (true) {
+				System.out.print("선택> ");
+				String select = sc.next();
+				if (select.toUpperCase().equals("Y")) { // Y 선택시 포인트 사용
+					int point = 0;
+					System.out.println("몇 포인트를 사용하시겠습니까?");
+					try {
+						System.out.print("사용할 포인트> ");
+						point = sc.nextInt();
+						if (point > totalPrice) {
+							System.out.println("포인트는 상품의 총 가격 이상으로 사용할 수 없습니다.");
+						} else if ((point < 0) || (point % 10 != 0)) {
+							System.out.println("포인트는 10포인트 단위 정수로 입력해주세요.");
+						} else {
+							member.usePoint(point);
+							System.out.println(point + "point를 사용하셨습니다.");
+							break;
+						}
+					} catch (Exception e) {
+						sc.next();
+						System.out.println("포인트는 10포인트 단위 정수로 입력해주세요.");
+					}
+					break;
+				} else if (select.toUpperCase().equals("N")) { // N 선택시 포인트 사용 안함
+					System.out.println("포인트를 사용하지 않으셨습니다.");
+					break;
+				} else {
+					System.out.println("Y 또는 N 으로 입력해주세요.");
+				}
+			}
+			member.setTotalPayment(member.getTotalPayment() + totalPrice);
+		}
+		System.out.println("상품 " + count + "종, 총 가격 " + totalPrice + "원을 결제했습니다.");
+		if (member != null) {
+			member.savePoint(totalPrice); // 포인트 적립
+			member.upgradeMembership(); // 회원등급 업그레이드
+		}
+		createReceipt(member, totalPrice, shoppingCart);
+		shoppingCart = new HashMap<>(); // 결제 후 장바구니 초기화
+	}
 
+	// 영수증 생성 메소드
+	public void createReceipt(Member member, int payment, Map<Product, Integer> shoppingCart) {
+		Date nowDate = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시:mm분:ss초");
+		String strNowDate = sdf.format(nowDate);
+		Receipt receipt = new Receipt(member, payment, strNowDate, shoppingCart);
+		supermarket.addReceipt(receipt);
+		if (member != null) {
+			member.addReceipt(receipt);
+		}
 	}
 }

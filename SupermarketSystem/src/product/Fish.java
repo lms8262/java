@@ -10,7 +10,7 @@ public class Fish extends Product {
 
 	@Override
 	public String productInfo() {
-		return origin + " " + super.getName() + "(" + super.getPrice() + "원)";
+		return origin + "|" + super.getName() + "|" + super.getPrice() + "원";
 	}
 
 	@Override

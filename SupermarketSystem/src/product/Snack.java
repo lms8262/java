@@ -10,7 +10,7 @@ public class Snack extends Product {
 
 	@Override
 	public String productInfo() {
-		return company + " " + super.getName() + "(" + super.getPrice() + "원)";
+		return company + "|" + super.getName() + "|" + super.getPrice() + "원";
 	}
 
 	@Override
