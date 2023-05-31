@@ -172,13 +172,13 @@ public class SupermarketApplication {
 
 	// 회원 검색
 	public Member searchMember(String memberName, int MemberNum) {
-		Iterator<Member> members = supermarket.getMemberList().iterator();
-		Member member = null;
 		Member checkMember = new Member(memberName, MemberNum);
+		Member member = null;
+		Iterator<Member> members = supermarket.getMemberList().iterator();
 		while (members.hasNext()) {
 			member = members.next();
-			if ((member.equals(checkMember)) && (member.hashCode() == checkMember.hashCode())) {
-				return member; // 검색한 회원이 있으면 리턴
+			if (checkMember.hashCode() == member.hashCode() && checkMember.equals(member)) {
+				return member; // 검색한 회원이 있으면 그 회원 리턴
 			}
 		}
 		return null; // 검색한 회원이 없으면 null 리턴
@@ -448,88 +448,61 @@ public class SupermarketApplication {
 			}
 		}
 
-		Iterator<Product> products = supermarket.getProductList().iterator();
+		Product product = null;
 		switch (kind) {
 		case Define.DRINK:
-			Drink drink = new Drink(productName, price, capacity);
-			while (products.hasNext()) {
-				Product product = products.next();
-				if (product instanceof Drink) {
-					if ((product.hashCode() == drink.hashCode()) && (product.equals(drink))) {
-						shoppingCart.put(product, amount);
-						System.out.println("상품을 장바구니에 담았습니다.");
-						return;
-					}
-				}
+			product = new Drink(productName, price, capacity);
+			if (supermarket.getProductList().contains(product)) { // 상품 목록에 있는 상품인지 확인
+				putInShoppingCart(product, amount);
+				return;
 			}
 			break;
 		case Define.FISH:
-			Fish fish = new Fish(productName, price, origin);
-			while (products.hasNext()) {
-				Product product = products.next();
-				if (product instanceof Fish) {
-					if ((product.hashCode() == fish.hashCode()) && (product.equals(fish))) {
-						shoppingCart.put(product, amount);
-						System.out.println("상품을 장바구니에 담았습니다.");
-						return;
-					}
-				}
+			product = new Fish(productName, price, origin);
+			if (supermarket.getProductList().contains(product)) {
+				putInShoppingCart(product, amount);
+				return;
 			}
 			break;
 		case Define.FRUIT:
-			Fruit fruit = new Fruit(productName, price, origin);
-			while (products.hasNext()) {
-				Product product = products.next();
-				if (product instanceof Fruit) {
-					if ((product.hashCode() == fruit.hashCode()) && (product.equals(fruit))) {
-						shoppingCart.put(product, amount);
-						System.out.println("상품을 장바구니에 담았습니다.");
-						return;
-					}
-				}
+			product = new Fruit(productName, price, origin);
+			if (supermarket.getProductList().contains(product)) {
+				putInShoppingCart(product, amount);
+				return;
 			}
 			break;
 		case Define.MEAT:
-			Meat meat = new Meat(productName, price, origin);
-			while (products.hasNext()) {
-				Product product = products.next();
-				if (product instanceof Meat) {
-					if ((product.hashCode() == meat.hashCode()) && (product.equals(meat))) {
-						shoppingCart.put(product, amount);
-						System.out.println("상품을 장바구니에 담았습니다.");
-						return;
-					}
-				}
+			product = new Meat(productName, price, origin);
+			if (supermarket.getProductList().contains(product)) {
+				putInShoppingCart(product, amount);
+				return;
 			}
 			break;
 		case Define.SNACK:
-			Snack snack = new Snack(productName, price, company);
-			while (products.hasNext()) {
-				Product product = products.next();
-				if (product instanceof Snack) {
-					if ((product.hashCode() == snack.hashCode()) && (product.equals(snack))) {
-						shoppingCart.put(product, amount);
-						System.out.println("상품을 장바구니에 담았습니다.");
-						return;
-					}
-				}
+			product = new Snack(productName, price, company);
+			if (supermarket.getProductList().contains(product)) {
+				putInShoppingCart(product, amount);
+				return;
 			}
 			break;
 		case Define.VEGETABLE:
-			Vegetable vegetable = new Vegetable(productName, price, origin);
-			while (products.hasNext()) {
-				Product product = products.next();
-				if (product instanceof Vegetable) {
-					if ((product.hashCode() == vegetable.hashCode()) && (product.equals(vegetable))) {
-						shoppingCart.put(product, amount);
-						System.out.println("상품을 장바구니에 담았습니다.");
-						return;
-					}
-				}
+			product = new Vegetable(productName, price, origin);
+			if (supermarket.getProductList().contains(product)) {
+				putInShoppingCart(product, amount);
+				return;
 			}
 			break;
 		}
 		System.out.println("없는 상품입니다.");
+	}
+
+	public void putInShoppingCart(Product product, int amount) { // 상품이 장바구니에 있는지 확인하고 넣기
+		if (shoppingCart.containsKey(product)) { // 이미 장바구니에 있는 상품일 경우 개수만 변경
+			shoppingCart.put(product, shoppingCart.get(product) + amount);
+		} else { // 장바구니에 없는 상품일 경우 새로 추가
+			shoppingCart.put(product, amount);
+		}
+		System.out.println("상품을 장바구니에 담았습니다.");
 	}
 
 	// 상품 결제하기
@@ -540,7 +513,6 @@ public class SupermarketApplication {
 			return;
 		}
 		Iterator<Map.Entry<Product, Integer>> products = shoppingCart.entrySet().iterator();
-		int count = 0;
 		int totalPrice = 0;
 		Member member = null;
 		while (products.hasNext()) {
@@ -548,9 +520,8 @@ public class SupermarketApplication {
 			Product product = productEntry.getKey();
 			int amount = productEntry.getValue();
 			totalPrice += product.getPrice() * amount;
-			count++;
 		}
-		System.out.println("상품 " + count + "종의 총 가격은 " + totalPrice + "입니다.");
+		System.out.println("상품 " + shoppingCart.size() + "종의 총 가격은 " + totalPrice + "원 입니다.");
 		member = login();
 		if (member == null) {
 			System.out.println("비회원은 포인트가 적립되지 않습니다.");
@@ -588,7 +559,7 @@ public class SupermarketApplication {
 			}
 			member.setTotalPayment(member.getTotalPayment() + totalPrice);
 		}
-		System.out.println("상품 " + count + "종, 총 가격 " + totalPrice + "원을 결제했습니다.");
+		System.out.println("상품 " + shoppingCart.size() + "종, 총 가격 " + totalPrice + "원을 결제했습니다.");
 		if (member != null) {
 			member.savePoint(totalPrice); // 포인트 적립
 			member.upgradeMembership(); // 회원등급 업그레이드
