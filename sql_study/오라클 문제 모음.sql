@@ -173,48 +173,113 @@ where job_id in('AD_PRES', 'SA_MAN') and salary >= 12000;
 
 
 -- ■ 1. emp 테이블에서 사원번호가 7698 인 사원의 이름, 업무, 급여를 출력하시오. ■
+select ENAME, JOB, SAL
+from emp
+where EMPNO = 7698;
 
 -- ■ 2. emp 테이블에서 사원이름이 SMITH인 사람의 이름과 월급, 부서번호를 구하시오. ■
+select ENAME, SAL, DEPTNO
+from emp
+where ENAME = 'SMITH';
 
 -- ■ 3. 월급이 2500이상 3500미만인 사원의 이름, 입사일, 월급을 구하시오. ■
+select ENAME, HIREDATE, SAL
+from emp
+where SAL >= 2500 and SAL < 3500;
 
 -- ■ 4. 급여가 2000에서 3000사이에 포함되지 않는 사원의 이름, 업무, 급여를 출력하시오. ■
+select ENAME, JOB, SAL
+from emp
+where SAL NOT BETWEEN 2000 and 3000;
 
 -- ■ 5. 81년05월01일과 81년12월03일 사이에 입사한 사원의 이름, 급여, 입사일을 출력하시오. ■
+select ENAME, SAL, HIREDATE
+from emp
+where HIREDATE BETWEEN '81/05/01' and '81/12/03';
 
 -- ■ 6. emp테이블에서 사원번호가 7566,7782,7934인 사원을 제외한 사람들의 사원번호,이름, 월급을 출력하시오. ■
+select EMPNO 사원번호, ENAME 이름, SAL 월급
+from emp
+where EMPNO NOT IN(7566, 7782, 7934);
 
 -- ■ 7. 부서번호 30(deptno)에서 근무하며 월2,000달러 이하를 받는 81년05월01일 이전에 입사한 사원의 이름, 급여, 부서번호, 입사일을 출력하시오. ■
+select ENAME 이름, SAL 급여, DEPTNO 부서번호, HIREDATE 입사일
+from emp
+where DEPTNO = 30
+and SAL <= 2000
+and HIREDATE <= '81/05/01';
 
 -- ■ 8. emp테이블에서 급여가 2,000와 5,000 사이고 부서번호가 10 또는 30인 사원의 이름과 급여,부서번호를 나열하시오. ■
+select ENAME 이름, SAL 급여, DEPTNO 부서번호
+from emp
+where SAL BETWEEN 2000 and 5000
+and DEPTNO IN(10, 30);
 
 -- ■ 9. 업무가 SALESMAN 또는 MANAGER이면서 급여가 1,600, 2,975 또는 2,850이 아닌 모든 사원의 이름, 업무 및 급여를 표시하시오. ■
+select ENAME 이름, JOB 업무, SAL 급여
+from emp
+where JOB IN('SALESMAN','MANAGER')
+and (SAL IN(1600, 2975) OR SAL NOT IN(2850));
 
 -- ■ 11. emp테이블에서 이름에 A와 E가 있는 모든 사원의 이름을 표시하시오. ■
+select ENAME 이름
+from emp
+where ENAME LIKE '%A%' and ENAME LIKE '%E%';
 
 -- ■ 12. emp테이블에서 관리자가 없는 모든 사원의 이름과 업무를 표시하시오. ■
+select ENAME 이름, JOB 업무
+from emp
+where MGR is null;
 
 -- ■ 13. emp테이블에서 커미션 항목이 입력된 사원들의 이름과 급여, 커미션을 구하시오. ■
-
-
+select ENAME 이름, SAL 급여, COMM 커미션
+from emp
+where COMM is not null;
 
 -- ■ 1. EMPLOYEES 테이블에서 입사일자 순으로 정렬하여 사원번호, 이름, 업무, 급여, 입사일자, 부서번호를 출력하라. ■
+select EMPLOYEE_ID 사원번호, LAST_NAME || ' ' || FIRST_NAME 이름, JOB_ID 업무, SALARY 급여, HIRE_DATE 입사일자, DEPARTMENT_ID 부서번호
+from EMPLOYEES
+order by HIRE_DATE asc;
 
 -- ■ 2. EMPLOYEES 테이블에서 가장 최근에 입사한 순으로 사원번호, 이름, 업무, 급여, 입사일자, 부서번호를 출력하라. ■
+select EMPLOYEE_ID 사원번호, LAST_NAME || ' ' || FIRST_NAME 이름, JOB_ID 업무, SALARY 급여, HIRE_DATE 입사일자, DEPARTMENT_ID 부서번호
+from employees
+order by HIRE_DATE desc;
 
 -- ■ 3. EMPLOYEES 테이블에서 부서번호로 정렬한 후 부서번호가 같을 경우 급여가 많은 순으로 정렬하여 사원번호, 성명, 업무, 부서번호, 급여를 출력하여라. ■
+select EMPLOYEE_ID 사원번호, LAST_NAME || ' ' || FIRST_NAME 성명, JOB_ID 업무, DEPARTMENT_ID 부서번호, SALARY 급여
+from employees
+order by DEPARTMENT_ID, SALARY desc;
 
 -- ■ 4. EMPLOYEES 테이블에서 첫번째 정렬은 부서번호로 두번째 정렬은 업무로 세번째정렬은 급여가 많은 순으로 정렬하여 사원번호, 성명, 입사일자, 부서번호, 업무, 급여를 출력하여라. ■
+select EMPLOYEE_ID 사원번호, LAST_NAME || ' ' || FIRST_NAME 성명, HIRE_DATE 입사일자, DEPARTMENT_ID 부서번호, JOB_ID 업무, SALARY 급여
+from employees
+order by DEPARTMENT_ID, JOB_ID, SALARY desc;
 
 -- ■ 5. EMPLOYEES 테이블에서 King의 정보를 소문자로 검색하고 사원번호, 성명, 담당업무(소문자로), 부서번호를 출력하라. ■
+select EMPLOYEE_ID 사원번호, LAST_NAME || ' ' || FIRST_NAME 성명, lower(JOB_ID) 담당업무, DEPARTMENT_ID 부서번호
+from employees
+where lower(LAST_NAME) = lower('king');
 
 -- ■ 6. EMPLOYEES 테이블에서 King의 정보를 대문자로 검색하고 사원번호, 성명, 담당업무(대문자로), 부서번호를 출력하라. ■
+select EMPLOYEE_ID 사원번호, LAST_NAME || ' ' || FIRST_NAME 성명, upper(JOB_ID) 담당업무, DEPARTMENT_ID 부서번호
+from employees
+where upper(LAST_NAME) = upper('king');
 
 -- ■ 7. DEPARTMENTS 테이블에서 부서번호와 부서이름, 부서이름과 위치번호를 합하여 출력하도록 하라. ■
+select DEPARTMENT_ID || DEPARTMENT_NAME 부서번호부서이름, DEPARTMENT_NAME || LOCATION_ID 부서이름위치번호
+from departments;
 
 -- ■ 8. EMPLOYEES 테이블에서 이름의 첫 글자가 'K' 보다 크고 'Y' 보다 적은 사원의 정보를 사원번호, 이름, 업무, 급여, 부서번호를 출력하라. 단 이름순으로 정렬하여라. ■
+select EMPLOYEE_ID 사원번호, LAST_NAME || ' ' || FIRST_NAME 이름, JOB_ID 업무, SALARY 급여, DEPARTMENT_ID 부서번호
+from employees
+where substr(LAST_NAME,1,1) between 'K' and 'Y'
+order by 이름;
 
 -- ■ 9. EMPLOYEES 테이블에서 20번 부서 중 이름의 길이 및 급여의 자릿수를 사원번호, 이름, 이름의 자릿수, 급여 급여의 자릿수를 출력하라. ■
+select EMPLOYEE_ID 사원번호, LAST_NAME || ' ' || FIRST_NAME 이름, length(LAST_NAME || ' ' || FIRST_NAME) 이름의자릿수, SALARY 급여, length(SALARY) 급여의자릿수
+from employees
+where DEPARTMENT_ID = 20;
 
 -- ■ 10. EMPLOYEES 테이블에서 이름 중 'e' 자의 위치를 출력하라. ■
 
