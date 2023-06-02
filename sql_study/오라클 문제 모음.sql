@@ -282,14 +282,29 @@ from employees
 where DEPARTMENT_ID = 20;
 
 -- ■ 10. EMPLOYEES 테이블에서 이름 중 'e' 자의 위치를 출력하라. ■
+select LAST_NAME || ' ' || FIRST_NAME 이름, instr(LAST_NAME || ' ' || FIRST_NAME, 'e')
+from employees;
 
 -- ■ 11. 다음 쿼리를 실행하고 결과를 분석하라. ■
+-- 4568, 4568, 4567.68, 4600
+-- 각각 반올림해서 소수점 0, 0, 2, -2 번째자리까지 반환
+select round(4567.678), round(4567.678,0), round(4567.678,2), round(4567.678, -2)
+from dual;
 
 -- ■ 12. EMPLOYEES 테이블에서 부서번호가 80인 사람의 급여를 30으로 나눈 나머지를 구하여 출력하라. ■
+select salary, mod(salary, 30) ,DEPARTMENT_ID
+from employees
+where DEPARTMENT_ID = 80;
 
--- ■ 13. EMPLOYEES 테이블에서 30번 부서 중 이름과 담당 업무를 연결하여 출력하여라. 단 담당 업무를 한 줄 아래로 출력하라. ■
+-- ■ 13. EMPLOYEES 테이블에서 30번 부서 중 이름과 담당 업무를 연결하여 출력하여라. 단 담당 업무를 한 줄 아래로 출력하라. ■  문제 이상함
+select LAST_NAME || ' ' || FIRST_NAME || ' ' ||JOB_ID 이름담당업무
+from employees
+where DEPARTMENT_ID = 30;
 
 -- ■ 14. EMPLOYEES 테이블에서 현재까지 근무일 수가 몇주 몇일 인가를 출력하여라. 단 근무 일수가 많은 사람 순으로 출력하여라. ■
+select LAST_NAME || ' ' || FIRST_NAME 이름, HIRE_DATE
+from employees
+order by HIRE_DATE;
 
 -- ■ 15. EMPLOYEES 테이블에서 부서 50에서 급여 앞에 $를 삽입하고 3자리마다 , 를 출력하라. ■
 
