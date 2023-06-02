@@ -6,16 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>registList.jsp</title>
-<style>
-	table, th, td{
-		border: 1px solid black;
-	}
-</style>
 </head>
 <body>
 	<h2>고객 목록</h2>
 	<hr>
-	<table>
+	<table border ="1">
 		<tr>
 			<th>아이디</th>
 			<th>이름</th>
