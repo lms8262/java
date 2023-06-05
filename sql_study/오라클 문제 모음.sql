@@ -236,6 +236,7 @@ select ENAME 이름, SAL 급여, COMM 커미션
 from emp
 where COMM is not null;
 
+
 -- ■ 1. EMPLOYEES 테이블에서 입사일자 순으로 정렬하여 사원번호, 이름, 업무, 급여, 입사일자, 부서번호를 출력하라. ■
 select EMPLOYEE_ID 사원번호, LAST_NAME || ' ' || FIRST_NAME 이름, JOB_ID 업무, SALARY 급여, HIRE_DATE 입사일자, DEPARTMENT_ID 부서번호
 from EMPLOYEES
@@ -307,70 +308,177 @@ from employees
 order by HIRE_DATE;
 
 -- ■ 15. EMPLOYEES 테이블에서 부서 50에서 급여 앞에 $를 삽입하고 3자리마다 , 를 출력하라. ■
+select department_id, to_char(salary, '$999,999,999')
+from employees
+where department_id = 50;
 
 -- ■ 16. EMPLOYEES 테이블에서 모든 SALESMAN(SA_MAN)에 대하여 급여의 평균,최고액,최저액,합계를 구하여 출력하여라. ■
+select avg(salary), max(salary), min(salary), sum(salary)
+from employees
+where job_id = 'SA_MAN';
 
 -- ■ 17. EMPLOYEES 테이블에 등록되어 있는 인원수, 보너스가 NULL이 아닌 인원수, 보너스의 평균, 등록되어 있는 부서의 수를 구하여 출력하라. ■
+select count(employee_id), count(commission_pct), sum(salary), count(DISTINCT(department_id))
+from employees;
 
 -- ■ 18. EMPLOYEES 테이블에서 부서별로 인원수, 평균 급여, 최저급여, 최고급여, 급여의 합을 구하여 출력하라. ■
+select department_id, count(department_id), round(avg(salary), 3), min(salary), max(salary), sum(salary)
+from employees
+group by department_id
+order by department_id;
 
 -- ■ 19. EMPLOYEES 테이블에서 각 부서별로 인원수, 급여의 평균, 최저 급여, 최고 급여, 급여의 합을 구하여 급여의 합이 많은 순으로 출력하여라. ■
+select department_id, count(department_id), round(avg(salary), 3), min(salary), max(salary), sum(salary)
+from employees
+group by department_id
+order by sum(salary) desc;
 
 -- ■ 20. EMPLOYEES 테이블에서 부서별, 업무별 그룹하여 결과를 부서번호, 업무, 인원수, 급여의 평균, 급여의 합을 구하여 출력하여라. ■
+select department_id, job_id, count(department_id),round(avg(salary), 3) ,sum(salary)
+from employees
+group by department_id, job_id
+order by department_id;
 
 -- ■ 21. EMPLOYEES 테이블에서 부서 인원이 4명보다 많은 부서의 부서번호, 인원수, 급여의 합을 구하여 출력하여라(GROUP BY, HAVING) ■
+select department_id, count(department_id), sum(salary)
+from employees
+group by department_id
+having count(department_id) > 4;
 
 -- ■ 22. EMPLOYEES 테이블에서 급여가 최대 10000이상인 부서에 대해서 부서번호, 평균급여, 급여의 합을 구하여 출력하여라. ■
+select department_id, round(avg(salary), 3), sum(salary)
+from employees
+group by department_id
+having max(salary) >= 10000;
 
 -- ■ 23. EMPLOYEES 테이블에서 업무별 급여의 평균이 10000 이상인 업무에 대해서 업무명, 평균 급여, 급여의 합을 구하여 출력하여라. ■
+select job_id, avg(salary), sum(salary)
+from employees
+group by job_id
+having avg(salary) >= 10000;
 
 -- ■ 24. EMPLOYEES 테이블에서 전체 월급이 10000을 초과하는 각 업무에 대해서 업무와 월급여 합계를 출력하라. 단 판매원은 제외하고 월 급여 합계로 정렬(내림차순) 하라. (SA_) ■
+select job_id, sum(salary)
+from employees
+where job_id not like('SA%')
+group by job_id
+having sum(salary) > 10000
+order by sum(salary) desc;
 
 -- ■ 25. 테이블에서 사원번호, 사원이름, 입사일을 출력하는데 입사일이 빠른 사람순으로 정렬하시오. ■
+select employee_id 사원번호, LAST_NAME || ' ' || FIRST_NAME 이름, hire_date 입사일
+from employees
+order by hire_date;
 
 -- ■ 26. emp 테이블에서 사원이름, 급여, 연봉을 구하고 연봉이 많은 순으로 정렬하시오.
+select ename 사원이름, sal 급여, sal * 12 연봉
+from emp
+order by sal * 12 desc;
 
 -- ■ 27. 10번 부서와 20번부서에서 근무하고 있는 사원의 이름과 부서번호를 출력하는데 이름을 영문자순으로 표시하시오. ■
+select ename 이름, deptno 부서번호
+from emp
+where deptno in(10, 20)
+order by ename;
 
 -- ■ 28 .커미션을 받는 모든 사원의 이름,급여 및 커미션을 커미션을 기준으로 내림차순으로 정렬하여 표시하십시오. ■
-
+select ename 이름, sal 급여, comm 커미션
+from emp
+order by comm desc;
 
 
 -- ■ 1. emp테이블의 업무(job)을 첫글자는 대문자 나머지는 소문자로 출력하시오. ■
+select initcap(job)
+from emp;
 
 -- ■ 2. emp테이블에서 사원이름 중 A가 포함된 사원이름을 구하고 그 이름 중 앞에서 3자만 추출하여 출력 ■
+select substr(ename, 1,3)
+from emp
+where ename like('%A%');
 
 -- ■ 3. 이름의 세번째 문자가 A인 모든 사원의 이름을 표시하시오. ■
+select ename
+from emp
+where substr(ename,3,1) = 'A';
 
 -- ■ 4. 이름이 J,A 또는 M으로 시작하는 모든 사원의 이름(첫 글자는 대문자로, 나머지 글자는 소문자로 표시) 및 이름의 길이를 표시하시오.(열 레이블은 name과 length로 표시) ■
+select initcap(ename) as name, length(ename) as length
+from emp
+where substr(ename,1 ,1) in('J', 'A', 'M');
 
 -- ■ 5. 이름의 글자수가 6자 이상인 사원의 이름을 소문자로 이름만 출력하시오 ■
+select lower(ename)
+from emp
+where length(ename) >= 6;
 
 -- ■ 6. 이름의 글자수가 6자 이상인 사람의 이름을 앞에서 3자만 구하여 소문자로 출력하시오. ■
+select lower(substr(ename, 1, 3))
+from emp
+where length(ename) >= 6;
 
 -- ■ 7. 모든 사원의 이름과 급여를 표시하시오. 급여는 15자 길이로 왼쪽에 $기호가 채워진 형식으로 표기하고 열레이블을 SALARY로 지정하시오. ■
-
+select ename, '$' || rpad(sal, 15, '0') as SALARY
+from emp;
 
 
 -- ■ 1. Steven King의 부서명을 출력하라. ■
+select e.last_name || ' ' || e.first_name, d.DEPARTMENT_NAME
+from employees e, departments d
+where e.department_id = d.department_id and e.first_name = 'Steven' and e.last_name = 'King';
 
 -- ■ 2. IT 부서에서 근무하고 있는 사람들을 출력하라. ■
+select e.last_name || ' ' || e.first_name, d.department_name
+from employees e, departments d
+where e.department_id = d.department_id and d.DEPARTMENT_NAME = 'IT';
 
 -- ■ 3. EMPLOYEES 테이블과 DEPARTMENTS 테이블의 부서번호를 조인하고 SA_MAN 사원만의 사원번호, 이름, 급여, 부서명, 근무지를 출력하라. (Alias를 사용) ■
+select e.employee_id 사원번호, e.last_name || ' ' || e.first_name 이름, e.salary 급여, d.department_name 부서명, d.location_id 근무지
+from employees e, departments d
+where e.department_id = d.department_id and job_id = 'SA_MAN';
 
 -- ■ 4. EMPLOYEES 테이블과 DEPARTMENTS 테이블에서 DEPARTMENTS 테이블에 있는 모든 자료를 사원번호, 이름, 업무, EMPLOYEES 테이블의 부서번호, DEPARTMENTS 테이블의 부서번호, 부서명, 근무지를 출력하여라. ■
+select e.EMPLOYEE_ID 사원번호, e.last_name || ' ' || e.first_name 이름, e.job_id 업무, e.DEPARTMENT_ID, d.DEPARTMENT_ID, d.DEPARTMENT_NAME 부서명, d.LOCATION_ID 근무지
+from employees e, departments d
+where e.DEPARTMENT_ID = d.DEPARTMENT_ID;
 
 -- ■ 5. EMPLOYEES 테이블에서 Self join하여 관리자(매니저)를 출력하여라. ■
+select a.EMPLOYEE_ID 사원번호, a.last_name || ' ' || a.first_name 사원, b.EMPLOYEE_ID 매니저번호, b.last_name || ' ' || b.first_name 매니저
+from employees a, employees b
+where a.MANAGER_ID = b.EMPLOYEE_ID;
 
 -- ■ 6. EMPLOYEES 테이블에서 left join하여 관리자(매니저)를 출력하고 매니저 아이디가 없는 사람은 배제하고 하향식으로 하며, 급여는 역순으로 출력하여라. ■
+select a.EMPLOYEE_ID 사원번호, a.last_name || ' ' || a.first_name 사원, a.salary 사원급여, b.EMPLOYEE_ID 매니저번호, b.last_name || ' ' || b.first_name 매니저, b.salary 매니저급여
+from employees a
+left join employees b
+on a.MANAGER_ID = b.EMPLOYEE_ID
+where a.manager_id is not null
+order by a.salary desc;
 
 -- ■ 7. EMPLOYEES 테이블에서 right join 하여 관리자(매니저)가 108번 상향식으로 급여는 역순으로 출력하라. ■
+select a.EMPLOYEE_ID 매니저번호, a.last_name || ' ' || a.first_name 매니저, a.salary 매니저급여, b.EMPLOYEE_ID 사원번호, b.last_name || ' ' || b.first_name 사원, b.salary 사원급여
+from employees a
+right join employees b
+on a.EMPLOYEE_ID = b.MANAGER_ID
+where b.manager_id = 108
+order by a.salary desc;
 
 -- ■ 8. 모든 사원의 이름, 부서번호, 부서이름을 표시하시오. (emp, dept) ■
+select a.ename 이름, a.deptno 부서번호, b.dname 부서이름
+from emp a, dept b
+where a.deptno = b.deptno;
 
 -- ■ 9. 업무가 MANAGER인 사원의 정보를 이름, 업무, 부서명, 근무지 순으로 출력하시오. ( emp, dept) ■
+select a.ename 이름, a.job 업무, b.dname 부서명, b.loc 근무지
+from emp a, dept b
+where a.deptno = b.deptno
+and job = 'MANAGER';
 
 -- ■ 10. 커미션을 받고 급여가 1,600이상인 사원의 사원이름, 부서명, 근무지를 출력하시오. ■
+select a.ename 이름, b.dname 부서명, b.loc 근무지
+from emp a, dept b
+where a.deptno = b.deptno
+and a.comm is not null and a.comm != 0
+and a.sal >= 1600;
 
 -- ■ 11. 근무지가 CHICAGO인 모든 사원의 이름, 업무, 부서번호 및 부서이름을 표시하시오. ■
 
