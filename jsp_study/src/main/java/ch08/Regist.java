@@ -6,14 +6,6 @@ public class Regist {
 	private String address;
 	private String grade;
 	private String phone;
-	
-	public Regist(String id, String name, String address, String grade, String phone) {
-		this.id = id;
-		this.name = name;
-		this.address = address;
-		this.grade = grade;
-		this.phone = phone;
-	}
 
 	public String getId() {
 		return id;

@@ -8,7 +8,7 @@
 <title>registList.jsp</title>
 </head>
 <body>
-	<h2>고객 목록</h2>
+	<h2>고객 목록</h2>[<a href="/jsp_study/rcontrol">새로고침</a>]
 	<hr>
 	<table border ="1">
 		<tr>
@@ -26,5 +26,14 @@
 			</tr>
 		</c:forEach>
 	</table>
-</body>
+	
+	<h2>고객 추가</h2>
+	<hr>
+	<form action="/jsp_study/rcontrol?action=insert" method="post">
+		<label>이름</label><input type="text" name="name" /><br />
+		<label>주소</label><input type="text" name="address" /><br />
+		<label>등급</label><input type="text" name="grade" /><br />
+		<label>번호</label><input type="text" name="phone" /><br />
+		<button type="submit">등록</button>
+	</form>
 </html>
