@@ -481,10 +481,23 @@ and a.comm is not null and a.comm != 0
 and a.sal >= 1600;
 
 -- ■ 11. 근무지가 CHICAGO인 모든 사원의 이름, 업무, 부서번호 및 부서이름을 표시하시오. ■
+select a.ename 이름, a.job 업무, b.deptno 부서번호, b.dname 부서이름, b.loc 근무지
+from emp a, dept b
+where a.deptno = b.deptno
+and b.loc = 'CHICAGO';
 
 -- ■ 12. 근무지별로 근무하는 사원의 수가 5명 이하인 경우, 인원이 적은 도시순으로 정렬하시오. (근무 인원이 0 명인 곳도 표시 ) ■
+select d.loc 근무지, count(e.empno) 인원수
+from emp e, dept d
+where e.deptno = d.deptno
+group by d.loc
+having count(e.empno) <= 5
+order by count(e.empno);
 
 -- ■ 13. 사원의 이름 및 사원 번호를 관리자의 이름과 관리자 번호와 함께 표시하고 각각의 열레이블은 employee, emp#, manager, mag#로 지정하시오. ■
+select a.ename employee, a.empno emp#, b.ename manager, b.empno mag#
+from emp a, emp b
+where a.mgr = b.empno;
 
 -- ■ 14. 관리자보다 먼저 입사한 모든 사원의 이름 및 입사일을 관리자의 이름 및 입사일과 함꼐 표시하고 열 레이블을 각각 employee, emp hired, manger, mgr hired로 지정 ■
 
