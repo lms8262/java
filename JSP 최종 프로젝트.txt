@@ -1,0 +1,38 @@
+<JSP최종 프로젝트>
+-주제: 자유
+-조건: MVC, CRUD
+-규모: 알아서
+-디자인: 깔끔, bootstrap 권장
+
+도서 정보 사이트
+도서 정보 추가
+전체 도서 리스트, 도서 부류별 리스트
+도서 정보 수정
+도서 정보 삭제
+
+BookController	컨트롤러
+BookDAO		DAO(모델)
+Book		DTO
+
+뷰
+index.jsp	메인화면(도서 리스트)
+write.jsp	새 도서 정보 추가
+edit.jsp	도서 정보 수정
+view.jsp	도서 상세 정보
+
+책 db
+도서번호		p키
+도서 제목		not null
+발행일		not null
+저자		not null
+출판사		not null
+페이지		not null
+도서 설명		not null
+카테고리번호	100/200/300 f키
+이미지
+
+책 카테고리 db
+카테고리번호	100/200/300 p키
+카테고리이름	만화/소설/기타
+
+

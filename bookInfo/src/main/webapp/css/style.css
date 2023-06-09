@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+/* 초기화 태그 */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: 10px;
+}
+
+ul, li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	cursor: pointer;
+}
+
+/* 공통 */
+header>nav>div {
+	display: flex;
+	justify-content: center !important;
+}
+
+footer>div {
+	height: 70px;
+	background-color: rgb(43, 48, 53);
+}
+
+/* index.jsp */
+.wrap {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.navbar_title {
+	font-size: 30px !important;
+}
+
+main {
+	min-height: 800px;
+	margin: 20px 0 20px 0;
+}
+
+.main_tab {
+	margin-bottom: 20px !important;
+	font-size: 20px;
+	--bs-nav-pills-link-active-bg: rgb(43, 48, 53) !important;
+	--bs-link-color: black;
+	font-size: 20px;
+}
+
+.book_list>div {
+	margin-bottom: 15px;
+}
+
+.book {
+	text-align: center;
+}
+
+.book a {
+	font-size: 15px;
+}
+
+.book>div {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.book>div>a{
+	width: 150px;
+	margin: 0 auto;
+}
