@@ -20,19 +20,19 @@ write.jsp	새 도서 정보 추가
 edit.jsp	도서 정보 수정
 view.jsp	도서 상세 정보
 
-책 db
-도서번호		p키
-도서 제목		not null
-발행일		not null
-저자		not null
-출판사		not null
-페이지		not null
-도서 설명		not null
-카테고리번호	100/200/300 f키
-이미지
+책 db		book
+도서번호		number	p키			book_no
+도서명		varchar2(255)	not null		book_name
+발행일		date				publication_date
+저자		varchar2(100)	not null		author
+출판사		varchar2(100)			publisher
+페이지		number				page
+도서 설명		clob		not null		book_intro
+카테고리번호	number	f키	100/200/300 not null	category_no
+이미지		varchar2(255)	default('/img/no_image.gif') not null		img
 
-책 카테고리 db
-카테고리번호	100/200/300 p키
-카테고리이름	만화/소설/기타
+책 카테고리 db	book_category
+카테고리번호	number		p키	100/200/300	category_no
+카테고리이름	varchar2(50)	not null	만화/소설/기타	category_name
 
 

@@ -6,10 +6,6 @@
 	padding: 0;
 }
 
-html {
-	font-size: 10px;
-}
-
 ul, li {
 	list-style: none;
 }
@@ -26,6 +22,11 @@ header>nav>div {
 	justify-content: center !important;
 }
 
+main {
+	min-height: 800px;
+	margin: 20px 0 20px 0;
+}
+
 footer>div {
 	height: 70px;
 	background-color: rgb(43, 48, 53);
@@ -39,11 +40,6 @@ footer>div {
 
 .navbar_title {
 	font-size: 30px !important;
-}
-
-main {
-	min-height: 800px;
-	margin: 20px 0 20px 0;
 }
 
 .main_tab {
@@ -72,7 +68,35 @@ main {
 	justify-content: space-around;
 }
 
-.book>div>a{
+.book>div>a {
 	width: 150px;
 	margin: 0 auto;
 }
+
+/* view.jsp */
+
+/* write.jsp */
+.book_write form {
+	font-size: 20px;
+}
+
+.book_write h2 {
+	border-bottom: 1px solid black;
+	padding-bottom: 20px;
+	text-align: center;
+}
+
+.book_write span {
+	font-size: 12px !important;
+}
+
+.write_btn {
+	text-align: center;
+}
+
+.write_btn a {
+	margin: 0 30px 0 30px;
+}
+
+/* edit.jsp */
+

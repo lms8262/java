@@ -214,7 +214,7 @@ public class BoardController extends HttpServlet {
 			dao.deleteBoard(board_no);
 		} catch (Exception e) {
 			e.printStackTrace();
-			ctx.log("게시물을 삭제과정에서 문제 발생");
+			ctx.log("게시물 삭제과정에서 문제 발생");
 
 			try {
 				// get방식으로 넘길때 한글 깨짐 방지

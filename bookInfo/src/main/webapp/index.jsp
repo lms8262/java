@@ -25,7 +25,7 @@
 				</div>
 			</nav>
 		</header>
-		<main>
+		<main class ="index_main">
 			<nav class="nav nav-pills nav-justified main_tab">
 				<a class="nav-link active" aria-current="page" href="#">전체</a> <a
 					class="nav-link" href="#">만화</a> <a class="nav-link" href="#">소설</a>
@@ -34,43 +34,7 @@
 			<div class="row book_list">
 				<div class="col-3 card-group">
 					<div class="card book">
-						<img src="/img/루피1.jpg" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h3 class="card-title">제목</h3>
-							<a href="#" class="btn btn-dark">상세정보 보기</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-3 card-group">
-					<div class="card book">
-						<img src="..." class="card-img-top" alt="...">
-						<div class="card-body">
-							<h3 class="card-title">제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목</h3>
-							<a href="#" class="btn btn-dark">상세정보 보기</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-3 card-group">
-					<div class="card book">
-						<img src="..." class="card-img-top" alt="...">
-						<div class="card-body">
-							<h3 class="card-title">제목</h3>
-							<a href="#" class="btn btn-dark">상세정보 보기</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-3 card-group">
-					<div class="card book">
-						<img src="..." class="card-img-top" alt="...">
-						<div class="card-body">
-							<h3 class="card-title">제목</h3>
-							<a href="#" class="btn btn-dark">상세정보 보기</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-3 card-group">
-					<div class="card book">
-						<img src="..." class="card-img-top" alt="...">
+						<img src="img/no_image.gif" class="card-img-top" alt="...">
 						<div class="card-body">
 							<h3 class="card-title">제목</h3>
 							<a href="#" class="btn btn-dark">상세정보 보기</a>
