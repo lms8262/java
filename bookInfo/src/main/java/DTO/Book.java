@@ -8,9 +8,8 @@ public class Book {
 	private String publisher; // 출판사
 	private int page; // 페이지
 	private String book_intro; // 도서 설명
-	private int category_no; // 카테고리 번호
+	private String category; // 카테고리
 	private String img; // 이미지 경로 + 이미지명
-	private String category_name; // 카테고리 이름
 
 	public int getBook_no() {
 		return book_no;
@@ -68,12 +67,12 @@ public class Book {
 		this.book_intro = book_intro;
 	}
 
-	public int getCategory_no() {
-		return category_no;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setCategory_no(int category_no) {
-		this.category_no = category_no;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public String getImg() {
@@ -82,14 +81,6 @@ public class Book {
 
 	public void setImg(String img) {
 		this.img = img;
-	}
-
-	public String getCategory_name() {
-		return category_name;
-	}
-
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
 	}
 
 }

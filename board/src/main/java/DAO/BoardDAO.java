@@ -128,17 +128,17 @@ public class BoardDAO {
 	// 게시글 수정하기
 	public void updateBoard(Board b) throws Exception {
 		Connection conn = open();
-		String sql ="update board set title = ?, user_id = ?, content = ?, img = ? where board_no = ?";
+		String sql = "update board set title = ?, user_id = ?, content = ?, img = ? where board_no = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		try(conn; pstmt) {
+		try (conn; pstmt) {
 			pstmt.setString(1, b.getTitle());
 			pstmt.setString(2, b.getUser_id());
 			pstmt.setString(3, b.getContent());
 			pstmt.setString(4, b.getImg());
 			pstmt.setInt(5, b.getBoard_no());
-			
+
 			// 수정된 글이 없을 경우
-			if(pstmt.executeUpdate() !=1) {
+			if (pstmt.executeUpdate() != 1) {
 				throw new Exception("수정된 글이 없습니다.");
 			}
 		}
@@ -149,10 +149,10 @@ public class BoardDAO {
 		Connection conn = open();
 		String sql = "delete from board where board_no = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		try(conn; pstmt) {
+		try (conn; pstmt) {
 			pstmt.setInt(1, board_no);
-			
-			if(pstmt.executeUpdate() != 1) {
+
+			if (pstmt.executeUpdate() != 1) {
 				throw new Exception("삭제된 글이 없습니다.");
 			}
 		}

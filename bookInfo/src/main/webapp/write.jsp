@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,18 +31,17 @@
 			<form class="row g-3" name="frm" method="post" action="insert"
 				enctype="multipart/form-data">
 				<div class="col-md-6">
-					<label for="book_name" class="form-label">도서명<span>(필수)</span></label>
-					<input type="text" class="form-control" id="book_name"
-						name="book_name">
+					<label for="book_name" class="form-label">도서명</label> <input
+						type="text" class="form-control" id="book_name" name="book_name">
 				</div>
 				<div class="col-md-6">
 					<label for="publication_date" class="form-label">발행일</label> <input
-						type="text" class="form-control" id="publication_date" placeholder="YYYY-MM-DD 형식으로 입력"
-						name="publication_date">
+						type="text" class="form-control" id="publication_date"
+						placeholder="YYYY-MM-DD 형식으로 입력" name="publication_date">
 				</div>
 				<div class="col-md-6">
-					<label for="author" class="form-label">저자<span>(필수)</span></label>
-					<input type="text" class="form-control" id="author" name="author">
+					<label for="author" class="form-label">저자</label> <input
+						type="text" class="form-control" id="author" name="author">
 				</div>
 				<div class="col-md-6">
 					<label for="publisher" class="form-label">출판사</label> <input
@@ -52,28 +52,26 @@
 						type="number" class="form-control" id="page" name="page">
 				</div>
 				<div class="col-md-6">
-					<label for="category_no" class="form-label">카테고리 번호<span>(필수)</span></label>
-					<input type="number" class="form-control" id="category_no"
-						placeholder="100(만화), 200(소설), 300(기타)" name="category_no">
+					<label for="category" class="form-label">카테고리</label> <input
+						type="text" class="form-control" id="category"
+						placeholder="만화, 소설, 그 외..." name="category">
 				</div>
 				<div class="col-12">
-					<label for="book_intro" class="form-label">도서 설명<span>(필수)</span></label>
+					<label for="book_intro" class="form-label">도서 설명</label>
 					<textarea class="form-control" id="book_intro" rows="10"
 						name="book_intro"></textarea>
 				</div>
 				<div class="col-12">
-					<label for="img" class="form-label">이미지</label> <input
-						class="form-control" type="file" id="img" name="img">
-				</div>
-				<div class="col-12 write_btn">
-					<a class="btn btn-primary" href="#" role="button">등록</a> <a
-						class="btn btn-secondary" href="#" role="button">취소</a>
+					<label for="file" class="form-label">이미지 파일</label> <input
+						class="form-control" type="file" id="file" name="file">
 				</div>
 			</form>
+			<div class="col-12 write_btn">
+				<a onclick="chkForm(); return false;" class="btn btn-primary" role="button">등록</a> <a
+					class="btn btn-secondary" href="list" role="button">취소</a>
+			</div>
 		</main>
-		<footer>
-			<div></div>
-		</footer>
 	</div>
+	<script type="text/javascript" src="./script.js"></script>
 </body>
 </html>

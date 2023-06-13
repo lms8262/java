@@ -23,13 +23,7 @@ header>nav>div {
 }
 
 main {
-	min-height: 800px;
 	margin: 20px 0 20px 0;
-}
-
-footer>div {
-	height: 70px;
-	background-color: rgb(43, 48, 53);
 }
 
 /* index.jsp */
@@ -74,14 +68,21 @@ footer>div {
 }
 
 /* view.jsp */
+.view_main h2 {
+	padding-bottom: 20px;
+	text-align: center;
+}
 
-/* write.jsp */
+.view_main img {
+	width: 100%;
+}
+
+/* write.jsp, edit.jsp */
 .book_write form {
 	font-size: 20px;
 }
 
 .book_write h2 {
-	border-bottom: 1px solid black;
 	padding-bottom: 20px;
 	text-align: center;
 }
@@ -92,11 +93,9 @@ footer>div {
 
 .write_btn {
 	text-align: center;
+	margin-top: 20px;
 }
 
 .write_btn a {
 	margin: 0 30px 0 30px;
 }
-
-/* edit.jsp */
-

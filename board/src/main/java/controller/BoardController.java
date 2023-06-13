@@ -143,7 +143,7 @@ public class BoardController extends HttpServlet {
 			dao.insertBoard(b);
 		} catch (Exception e) {
 			e.printStackTrace();
-			ctx.log("게시물을 작성과정에서 문제 발생");
+			ctx.log("게시물 작성과정에서 문제 발생");
 
 			try {
 				// get방식으로 넘길때 한글 깨짐 방지
