@@ -1,8 +1,0 @@
-package com.springquiz.dto;
-
-public class Student {
-	private String name;
-	private String age;
-	private String java;
-	private String orcle;
-}
